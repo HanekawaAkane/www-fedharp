@@ -1,0 +1,35 @@
+FedHARP anonymous code package (projection-only)
+Packaged: 2026-10-26
+Contents: FedHARP method code only. Baseline method implementations and non-projection
+transport operators have been removed. Identity information has been scrubbed.
+
+Files (sha256):
+  4530aa9697f85f34cf98f89c16a927573a50ea393a80e939ebdb4bfe80e9023b  client.py
+      # FedHarpClient: local training, A/B factor handling, sensitivity upload.
+  e47edb4fd4a82c87e147204dac9fec2dc26d6ed164a2a03bec8beb5fc9ce921d  dataset.py
+      # CIFAR-10/100, ChestXray8 loaders with Dirichlet/uniform partitions.
+  9f0fb0ecc9c78c9d8b96ff50e9e6019c2e2678fb6c205d6e721c797dbfe3cef8  early_stopping.py
+      # Early-stopping helper.
+  031936f56fc756d1721a06e4203ce8e421a7ea0b4e6fdabe092d0873715a6a62  factor_projection.py
+      # Closed-form factor projection transport: min ||B*A_new - B_old*A_old||^2 + ridge*||B||^2.
+  03afde48fd305f8b3570e737f1c9094db2f6fd5e6a065804e6ffe2b48cf37096  main.py
+      # Unified experiment entry (vision_main + task dispatch).
+  e2fff690806ff2fa6ada79455283bf02d27c274c328302a3f126d81bb5aeac1f  models.py
+      # LoRA layer implementation and ViT model builders.
+  5ed52612fa3701c7c63faa9a7afc954946fb0bc6ff3c5115e9864a8a8e4140c8  projection_validation.py
+      # Projection operator validation utilities.
+  23291fe13f785d79922c15f24efde833b15db7113c63bc324cef786b95fb791a  pubmedqa_projection.py
+      # PubMedQA projection-arm validation runner.
+  a3916e56198ad12afe1c546c3551cd6cf21db16668d53c1e34aeb344d417bb5f  roberta_entry_override.py
+      # RoBERTa/GLUE task entry (loaded via <task>_entry_override.py).
+  775817a4a037638677895f151242f8ab363ba52e45fbe6b3fff4a6e48315aa22  server.py
+      # FedHarpServer: DSA allocation (structural prior x B-gradient PoE), staleness-aware aggregation.
+  f42c915cfa8254298a00256cd04b4f5711da0fb71aed10eeabfe93b89af2a28b  test_factor_projection.py
+      # Unit tests for the projection operator.
+  d2c997b3f7f6239a59e8734be425f220fdf3884713bae84cca2ffdc83107c938  utils.py
+      # Seeding, device, checkpoint and misc helpers.
+
+Entry points:
+  python main.py --task vision   ...   # vision experiments (CIFAR-10/100, ChestXray8)
+  python main.py --task roberta  ...   # RoBERTa/GLUE experiments
+  python test_factor_projection.py     # projection operator unit tests
